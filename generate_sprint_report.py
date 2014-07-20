@@ -1,6 +1,8 @@
 import getopt
 import sys
 import json
+import os.path
+
 # import bug_breakdown_for_sprint
 # import write_file
 # import stories_qa_passed_in_sprint
@@ -48,7 +50,10 @@ def main(argv):
 
 
 def printUsage():
+    print "\n"
     print "Usage: python generate_sprint_report.py -u [username] -p [password]"
+    print "optional: --config path/to/my_config.json"
+    print "\n"
 
 
 def getConfiguration(argv):
@@ -71,6 +76,12 @@ def getConfiguration(argv):
             config_file_name = arg
 
     if username is None or password is None:
+        print "Missing username or password"
+        printUsage()
+        sys.exit(-1)
+
+    if not os.path.isfile(config_file_name):
+        print "Missing configuration file (config.json)"
         printUsage()
         sys.exit(-1)
 
