@@ -19,7 +19,6 @@ def open_bugs_list():
             fixVersionsList += version.name +" "
         fixVersionsList = fixVersionsList[:-1]
 
-        print issue.fields.customfield_11100
 
         myArray[row_index][0] = issue.key
         myArray[row_index][1] = issue.fields.summary

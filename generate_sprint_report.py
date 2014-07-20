@@ -3,17 +3,24 @@ import getopt
 import sys
 import json
 import os.path
-
+from jira.client import JIRA
+import write_file
+from report_data import ReportData
 
 
 def main(argv):
 
     configuration = getConfiguration(argv)
-    print configuration.username
-    print configuration.password
-    print configuration.host
-    print configuration.project_name
-    print configuration.sprint
+
+    server_details = {
+        'server': configuration.host
+    }
+
+    jira = JIRA(options=server_details, basic_auth=(configuration.username, configuration.password))
+    report = ReportData(jira, configuration.project_name, configuration.sprint)
+    write_file.write_bug_count_in_sprint(report)
+    write_file.write_stories_passed_by_qa(report)
+    write_file.write_open_bugs_in_project(report)
 
 
 def printUsage():

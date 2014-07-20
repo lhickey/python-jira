@@ -1,12 +1,10 @@
 from xlutils.copy import copy # http://pypi.python.org/pypi/xlutils
 from xlrd import open_workbook # http://pypi.python.org/pypi/xlrd
-import open_bugs_in_project
-import report_data
 
 
-wb = copy(open_workbook('test.xlsx'))
+wb = copy(open_workbook('report_data.xlsx'))
 
-def write_bug_count_in_sprint():
+def write_bug_count_in_sprint(report_data):
     w_sheet = wb.get_sheet(0)
 
     w_sheet.write(0, 0, "Blocker")
@@ -25,23 +23,23 @@ def write_bug_count_in_sprint():
     w_sheet.write(7, 0, "Bugs Fixed in Sprint")
     w_sheet.write(7, 1, report_data.bugs_fixed_in_sprint())
 
-    wb.save('test.xlsx')
+    wb.save('report_data.xlsx')
 
 
-def write_stories_passed_by_qa():
+def write_stories_passed_by_qa(report_data):
 
     w_sheet = wb.get_sheet(1)
 
-    results = open_bugs_in_project.open_bugs_list()
+    results = report_data.open_bugs_list()
 
     for index, result in enumerate(results):
         for column_index in range(0, 2):
             w_sheet.write(index, column_index, result[column_index])
 
-    wb.save('test.xlsx')
+    wb.save('report_data.xlsx')
 
 
-def write_open_bugs_in_project():
+def write_open_bugs_in_project(report_data):
 
     w_sheet = wb.get_sheet(2)
 
@@ -51,4 +49,4 @@ def write_open_bugs_in_project():
         for column_index in range(0, 6):
             w_sheet.write(index, column_index, result[column_index])
 
-    wb.save('test.xlsx')
+    wb.save('report_data.xlsx')
