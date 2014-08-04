@@ -6,11 +6,10 @@ from xlwt import Workbook
 
 wb = xlwt.Workbook()
 wb_name = 'Sprint report data.xls'
-# wb = copy(open_workbook('report_data.xlsx'))
+
 
 def write_bug_count_in_sprint(report_data):
     w_sheet = wb.add_sheet("bug breakdown")
-    # w_sheet = wb.get_sheet(0)
 
     w_sheet.write(0, 0, "Blocker")
     w_sheet.write(1, 0, "Critical")
@@ -33,9 +32,9 @@ def write_bug_count_in_sprint(report_data):
 
 def write_stories_passed_by_qa(report_data):
 
-    # w_sheet = wb.get_sheet(1)
     w_sheet = wb.add_sheet("stories passed by qa")
-    results = report_data.open_bugs_list()
+
+    results = report_data.stories_passed_by_qa()
 
     for index, result in enumerate(results):
         for column_index in range(0, 2):
@@ -46,7 +45,6 @@ def write_stories_passed_by_qa(report_data):
 
 def write_open_bugs_in_project(report_data):
 
-    # w_sheet = wb.get_sheet(2)
     w_sheet = wb.add_sheet("Open bugs in project")
     results = report_data.open_bugs_list()
 
